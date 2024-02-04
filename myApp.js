@@ -1,5 +1,6 @@
 require('dotenv').config();
-
+const process= require('process');
+process.removeAllListeners('warning');
 
 // ------------------------------------------------------
 // ** Install and Set Up Mongoose **
@@ -34,14 +35,23 @@ const personSchema = new mongoose.Schema({
 });
 
 
-const Person = mongoose.model('Person', personSchema);
+var Person = mongoose.model('Person', personSchema);
 
 // ------------------------------------------------------
-
+// ** Create and Save a Record of a Model **
 const createAndSavePerson = (done) => {
-  done(null /*, data*/);
+  let newUser = new Person({
+    name: 'Kevin',
+    age: 30,
+  })
+  newUser.save((err, data) => {
+    if (err) return console.error(err);
+    done(null /*, data*/)
+    }
+  )
 };
 
+// ------------------------------------------------------
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
 };
