@@ -35,7 +35,7 @@ const personSchema = new mongoose.Schema({
 });
 
 
-var Person = mongoose.model('Person', personSchema);
+let Person = mongoose.model('Person', personSchema);
 
 // ------------------------------------------------------
 // ** Create and Save a Record of a Model **
@@ -52,10 +52,17 @@ const createAndSavePerson = (done) => {
 };
 
 // ------------------------------------------------------
+// ** Create Many Records with model.create() **
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  let manyUsers = new Person.create(arrayOfPeople)
+  manyUsers.save((err, data) => {
+    if (err) return console.error(err);
+    done(null, data)
+    }
+  )
 };
 
+// ------------------------------------------------------
 const findPeopleByName = (personName, done) => {
   done(null /*, data*/);
 };
