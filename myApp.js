@@ -59,7 +59,8 @@ let arrayOfPeople = [
   {name: "Robert", age: 78, favoriteFoods: ["wine"]}
 ];
 
-const createManyPeople = function(arrayOfPeople, done) {
+const createManyPeople = (arrayOfPeople, done) => {
+  console.log(arrayOfPeople);
   Person.create(arrayOfPeople, (err, data) => {
     if (err) return console.log(err);
     done(null, data);
@@ -67,10 +68,16 @@ const createManyPeople = function(arrayOfPeople, done) {
 };
 
 // ------------------------------------------------------
+// ** Use model.find() to Search Your Database **
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find(personName, (err, data) => {
+    if (err){ console.log(err)};
+    done(null /*, data*/);
+  }
+  );
 };
 
+// ------------------------------------------------------
 const findOneByFood = (food, done) => {
   done(null /*, data*/);
 };
