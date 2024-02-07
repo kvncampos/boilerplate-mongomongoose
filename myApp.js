@@ -79,25 +79,25 @@ const findPeopleByName = (personName, done) => {
 
 // ------------------------------------------------------
 // ** Uses a traditional callback approach, which can lead to callback hell (nested callbacks) if not handled carefully. **
-// const findOneByFood = (food, done) => {
-  // Person.findOne({favoriteFoods: food}, (err, data) => {
-    // if (err){ console.log(err)};
-    // done(null, data);
-    // }
-  // );
-// };
-
-// ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
-const findOneByFood = (food) => {
-  Person.findOne({ favoriteFoods: food })
-    .then((doc) => {
-      console.log("Result :", doc);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const findOneByFood = (food, done) => {
+  Person.findOne({favoriteFoods: food}, (err, data) => {
+    if (err){ console.log(err)};
+    done(null, data);
+    }
+  );
 };
 
+// ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
+// const findOneByFood = (food) => {
+  // Person.findOne({ favoriteFoods: food })
+    // .then((doc) => {
+      // console.log("Result :", doc);
+    // })
+    // .catch((err) => {
+      // console.log(err);
+    // });
+// };
+// 
 // ------------------------------------------------------
 const findPersonById = (personId, done) => {
   done(null /*, data*/);
