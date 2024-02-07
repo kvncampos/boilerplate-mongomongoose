@@ -82,8 +82,13 @@ const findPeopleByName = (personName, done) => {
 
 // 1. ** Uses a traditional callback approach, which can lead to callback hell (nested callbacks) if not handled carefully. **
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food}, (err, data) => {
-    if (err){ console.log(err)};
+  Person.findOne({favoriteFoods: food}, (err, docs) => {
+    if (err){
+        console.log(err);
+    }
+    else{
+        console.log("Result : ", docs);
+    }
     done(null, data);
     }
   );
@@ -103,11 +108,16 @@ const findOneByFood = (food, done) => {
 // ------------------------------------------------------
 // ** Use model.findById() to Search Your Database By _id ** 
 const findPersonById = (personId, done) => {
-  Person.findId({_id: personId}, (err, data) => {
-    if (err){ console.log(err)};
+  Person.findId(personId, (err, docs) => {
+    if (err){
+      console.log(err);
+    }
+    else{
+        console.log("Result : ", docs);
+    }
     done(null, data);
     }
-  );
+  )
 };
 
 // ------------------------------------------------------
