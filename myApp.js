@@ -89,14 +89,14 @@ const findPeopleByName = (personName, done) => {
 
 // ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
 const findOneByFood = (food) => {
-  Person.findOneByFoodconst ({favoriteFoods: food })
-    .then((docs)=>{
-        console.log("Result :",docs);
+  Person.findOne({ favoriteFoods: food })
+    .then((doc) => {
+      console.log("Result :", doc);
     })
-    .catch((err)=>{
-        console.log(err);
-    })
-  };
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 // ------------------------------------------------------
 const findPersonById = (personId, done) => {
