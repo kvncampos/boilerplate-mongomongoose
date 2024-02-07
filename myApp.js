@@ -128,7 +128,7 @@ const findPersonById = (personId, done) => {
 // ------------------------------------------------------
 // ** Perform Classic Updates by Running Find, Edit, then Save **
 const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
+  let foodToAdd = "hamburger";
   Person.updateOne({ _id: personId }, { $set: { favoriteFoods: [foodToAdd] } }, (err, doc) => {
     if (err) {
       console.log(err);
