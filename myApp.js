@@ -82,17 +82,17 @@ const findPeopleByName = (personName, done) => {
 
 // 1. ** Uses a traditional callback approach, which can lead to callback hell (nested callbacks) if not handled carefully. **
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food}, (err, docs) => {
-    if (err){
-        console.log(err);
+  Person.findOne({ favoriteFoods: food }, (err, doc) => {
+    if (err) {
+      console.log(err); // Log the error
+      done(err); // Pass the error to the callback
+    } else {
+      console.log("Result:", doc); // Log the result
+      done(null, doc); // Pass the document to the callback
     }
-    else{
-        console.log("Result : ", docs);
-    }
-    done(null, data);
-    }
-  );
+  });
 };
+
 
 // 2. ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
 // const findOneByFood = (food) => {
@@ -105,8 +105,10 @@ const findOneByFood = (food, done) => {
     // });
 // };
 // 
+
 // ------------------------------------------------------
 // ** Use model.findById() to Search Your Database By _id ** 
+
 let personId = 123
 
 const findPersonById = (personId, done) => {
@@ -124,12 +126,22 @@ const findPersonById = (personId, done) => {
 
 
 // ------------------------------------------------------
+// ** Perform Classic Updates by Running Find, Edit, then Save **
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.updateOne({ _id: personId }, { $set: { favoriteFoods: [foodToAdd] } }, (err, doc) => {
+    if (err) {
+      console.log(err);
+      done(err); // Pass the error to the callback
+    } else {
+      console.log("Saved Successful. :", doc);
+      // If updateOne succeeded, there is no `save()` method on the model
+      done(null, doc); // Pass the document to the callback
+    }
+  });
 };
 
+// ------------------------------------------------------
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
 
