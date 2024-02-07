@@ -78,7 +78,9 @@ const findPeopleByName = (personName, done) => {
 };
 
 // ------------------------------------------------------
-// ** Uses a traditional callback approach, which can lead to callback hell (nested callbacks) if not handled carefully. **
+// ** Use model.findOne() to Return a Single Matching Document from Your Database **
+
+// 1. ** Uses a traditional callback approach, which can lead to callback hell (nested callbacks) if not handled carefully. **
 const findOneByFood = (food, done) => {
   Person.findOne({favoriteFoods: food}, (err, data) => {
     if (err){ console.log(err)};
@@ -87,7 +89,7 @@ const findOneByFood = (food, done) => {
   );
 };
 
-// ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
+// 2. ** Uses Promises for handling asynchronous operations, while the second snippet uses callbacks. **
 // const findOneByFood = (food) => {
   // Person.findOne({ favoriteFoods: food })
     // .then((doc) => {
@@ -99,10 +101,16 @@ const findOneByFood = (food, done) => {
 // };
 // 
 // ------------------------------------------------------
+// ** Use model.findById() to Search Your Database By _id ** 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findId({_id: personId}, (err, data) => {
+    if (err){ console.log(err)};
+    done(null, data);
+    }
+  );
 };
 
+// ------------------------------------------------------
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
