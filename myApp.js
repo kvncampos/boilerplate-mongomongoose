@@ -151,7 +151,7 @@ const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
   Person.findOneAndUpdate(
     { name: personName }, // Filter
-    { age: ageToSet }, // What to change
+    { age: ageToSet }, // What to changes
     { new: true }, // Use `new` option instead of `returnNewDocument`
     (err, doc) => {
       if (err) {
@@ -166,10 +166,9 @@ const findAndUpdate = (personName, done) => {
 };
 
 // ------------------------------------------------------
-// ** Delete One Document Using model.findByIdAndRemove **
 
 const removeById = (personId, done) => {
-  findByIdAndRemove(personId, (err, docs) => {
+  Person.findByIdAndRemove(personId, (err, docs) => {
     if (err) {
         console.log(err)
         done(null, docs);
@@ -178,13 +177,12 @@ const removeById = (personId, done) => {
         console.log("Removed User:", docs);
         done(null, docs);
     }
-});
+  });
 };
-
-// ------------------------------------------------------
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
+
   done(null /*, data*/);
 };
 
