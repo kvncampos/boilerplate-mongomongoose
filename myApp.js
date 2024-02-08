@@ -149,8 +149,20 @@ const findEditThenSave = (personId, done) => {
 // ** Perform New Updates on a Document Using model.findOneAndUpdate() **
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-  Person.findOneAndUpdate({name: personName}, {age: ageToSet}, {returnNewDocument: true})
-  done(null, returnNewDocument);
+  Person.findOneAndUpdate(
+    { name: personName }, // Filter
+    { age: ageToSet }, // What to change
+    { new: true }, // Use `new` option instead of `returnNewDocument`
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+        done(err); // Pass the error to the callback
+      } else {
+        console.log("Updated document:", doc);
+        done(null, doc); // Pass the updated document to the callback
+      }
+    }
+  );
 };
 
 // ------------------------------------------------------
